@@ -1,9 +1,32 @@
 {% extends "layout.html" %}
 
 {% block body %}
-    <ul>
-        {% for name,sport in registrants.items() %}
-            <li>{{name}} is registered for {{sport}}</li>
-        {% endfor %}
-    </ul>
+    <h1>Registrants for Sports</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Sports</th>
+                <th></th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for people in registrant %}
+            <tr>
+                <td> {{ people.name }} </td>
+                <td> {{ people.sport}} </td>
+                <td>
+                    <form action="/deregister" method="post">
+                        <input name="id" type="hidden" value="{{ people.id }}">
+                        <input type="submit" value="Deregister">
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+
 {% endblock %}
+ 
